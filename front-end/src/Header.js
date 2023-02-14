@@ -8,10 +8,11 @@ import { Link } from 'react-router-dom'
  * @returns The contents of this component, in JSX form.
  */
 const Header = props => {
-  return (
+  return (//have to use className, not class
     <header className="Header-header">
       <nav className="Header-navbar">
         <Link to="/" className="logo">
+        {/*No quotes around attributes, use curly braces to execute as JS*/}
           <img src={logo} alt="Our fabulous logo" />
         </Link>
         <ul className="nav-links">

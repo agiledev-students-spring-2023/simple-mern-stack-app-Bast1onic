@@ -27,7 +27,7 @@ app.get('/messages', async (req, res) => {
   // load all messages from database
   try {
     const messages = await Message.find({})
-    res.json({
+    res.json({//triggers a response formatted as JSON returned to frontend
       messages: messages,
       status: 'all good',
     })

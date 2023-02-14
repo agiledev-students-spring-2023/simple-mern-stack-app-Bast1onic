@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './Messages.css'
-import loadingIcon from './loading.gif'
+import loadingIcon from './loading.gif'//shown depending on state of state var
 import MessageForm from './MessageForm'
 import Message from './Message'
 
@@ -11,6 +11,7 @@ import Message from './Message'
  * @returns The contents of this component, in JSX form.
  */
 const Messages = props => {
+  //     array,    setterFunc     returns a state var
   const [messages, setMessages] = useState([])
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState('')
@@ -23,7 +24,8 @@ const Messages = props => {
     // setMessages([])
     // setLoaded(false)
     axios
-      .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/messages`)
+        //    env var in .env
+      .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/messages`)//returns a promise
       .then(response => {
         // axios bundles up all response data in response.data property
         const messages = response.data.messages
