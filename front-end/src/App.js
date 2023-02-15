@@ -3,9 +3,10 @@ import './App.css'
 import Messages from './Messages'
 import MessageStandalone from './MessageStandalone'
 import Home from './Home'
-import About from './About'
+import AboutUs from './AboutUs'
 import Header from './Header'
 import Footer from './Footer'
+import pfp from './pfp.png'
 
 const App = props => {
   return (//JSX, simulated HTML
@@ -18,7 +19,10 @@ const App = props => {
             <Route path="/" element={<Home />} />
 
             {/* a route for the About Us page */}
-            <Route path="/about" element={<About />} />
+            <Route path="/aboutus" element={<AboutUs />} />
+
+            {/* a route for profile picture */}
+            <Route path = "aboutus/pfp" element={pfp} />
 
             {/* a route to see a list of all messages */}
             <Route path="/messages" element={<Messages />} />

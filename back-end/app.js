@@ -8,6 +8,7 @@ const app = express() // instantiate an Express object
 app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV === 'test' })) // log all incoming requests, except when in unit test mode.  morgan has a few logging default styles - dev is a nice concise color-coded style
 app.use(cors()) // allow cross-origin resource sharing
 
+
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
@@ -18,9 +19,10 @@ mongoose
   .then(data => console.log(`Connected to MongoDB`))
   .catch(err => console.error(`Failed to connect to MongoDB: ${err}`))
 
-// load the dataabase models we want to deal with
+// load the database models we want to deal with
 const { Message } = require('./models/Message')
 const { User } = require('./models/User')
+const { AboutMe } = require('./models/AboutMe')
 
 // a route to handle fetching all messages
 app.get('/messages', async (req, res) => {
@@ -77,6 +79,33 @@ app.post('/messages/save', async (req, res) => {
     })
   }
 })
+
+//****
+
+// a route to handle fetching About Us content
+app.get('/aboutus', async (req, res) => {
+  // load from database
+  try {
+    const content = {
+      desc: "Hi, I'm Allen. I'm a senior at NYU's College of Arts and Science studying Computer Science and Data Science. I don't have much experience with developing web technologies, apart from a little HTML/CSS and Javascript. I am certain that will change in the coming weeks, and this app is one small part of that.",
+      picture: 'http:/localhost:7002/static/media/pfp.b1740ae0ad705f97b224.png'
+    }
+    res.json({//triggers a response formatted as JSON returned to frontend
+      desc: content.desc,
+      pic: content.picture,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(400).json({
+      error: err,
+      status: 'failed to retrieve About Us content from the database',
+    })
+  }
+})
+
+
+
 
 // export the express app we created to make it available to other modules
 module.exports = app // CommonJS export style!

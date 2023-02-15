@@ -21,4 +21,4 @@ const About = props => {
 }
 
 // make this component available to be imported into any other file
-export default Home
+export default About
