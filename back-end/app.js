@@ -7,7 +7,8 @@ const mongoose = require('mongoose')
 const app = express() // instantiate an Express object
 app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV === 'test' })) // log all incoming requests, except when in unit test mode.  morgan has a few logging default styles - dev is a nice concise color-coded style
 app.use(cors()) // allow cross-origin resource sharing
-
+app.use(express.static(__dirname + '../front-end/src'))
+console.log(__dirname)
 
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()) // decode JSON-formatted incoming POST data
@@ -88,7 +89,7 @@ app.get('/aboutus', async (req, res) => {
   try {
     const content = {
       desc: "Hi, I'm Allen. I'm a senior at NYU's College of Arts and Science studying Computer Science and Data Science. I don't have much experience with developing web technologies, apart from a little HTML/CSS and Javascript. I am certain that will change in the coming weeks, and this app is one small part of that.",
-      picture: 'http:/localhost:7002/static/media/pfp.b1740ae0ad705f97b224.png'
+      picture: './pfp.png'
     }
     res.json({//triggers a response formatted as JSON returned to frontend
       desc: content.desc,
