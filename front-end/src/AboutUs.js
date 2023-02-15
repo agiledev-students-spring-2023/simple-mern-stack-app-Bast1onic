@@ -11,9 +11,6 @@ import loadingIcon from './loading.gif'//shown depending on state of state var
 const AboutUs = props => {
   //     array,    setterFunc     returns a state var
   const [content, setCont] = useState([])
-  const [loaded, setLoaded] = useState(false)
-  const [error, setError] = useState('')
-  const [feedback, setFeedback] = useState('')
 
   /**
    * A nested function that fetches messages from the back-end server.
@@ -30,11 +27,7 @@ const AboutUs = props => {
         setCont(toDisplay)
       })
       .catch(err => {
-        setError(err)
-      })
-      .finally(() => {
-        // the response has been received, so remove the loading icon
-        setLoaded(true)
+        console.log(err)
       })
   }
 
@@ -59,12 +52,8 @@ const AboutUs = props => {
 
   return (
     <>
-      {feedback && <p className="MessageForm-feedback">{feedback}</p>}
-      {error && <p className="MessageForm-error">{error}</p>}
       <p>{content.desc}</p>
-      <img src={content.picture} alt='pfp'/>
-      {error && <p className="Messages-error">{error}</p>}
-      {!loaded && <img src={loadingIcon} alt="loading" />}
+      <img src={content.pic} alt='pfp'/>
     </>
   )
 }
